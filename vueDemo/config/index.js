@@ -3,6 +3,18 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const os = require('os');
+
+let ifaces = os.networkInterfaces()
+// 获取本地 ip 地址 例子: 192.168.1.101
+let LANIP = ''
+for (let dev in ifaces) {
+  for (let i = 0; i < ifaces[dev].length; i++) {
+    if (ifaces[dev][i].address.indexOf('192.168') !== -1) {
+      LANIP = ifaces[dev][i].address
+    }
+  }
+}
 
 module.exports = {
   dev: {
@@ -13,9 +25,9 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: LANIP || 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
-    autoOpenBrowser: false,
+    autoOpenBrowser: true, //自动打开浏览器
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-

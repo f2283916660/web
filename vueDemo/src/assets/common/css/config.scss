@@ -1,0 +1,82 @@
+/**
+ * Created by fwxing on 2018/3/26 16:36
+ * 全局变量及 mix 此文件中的样式每个vue文件都会引用,只声明变量和mix
+ */
+//1rem = 100px
+$pxToRemScale: 100;
+//主色调
+$mainColor: #83C582;
+
+//字体颜色
+$txtColor: #203736;       //默认字体颜色
+$txtColorLight: #B4B5B5;  //次要文字
+$txtColorPrimary: #83C582;
+$txtWarn: #F6C262;        //警告文字
+// 背景颜色
+$backgroundColor: #F5FAF5;
+
+
+//清除浮动
+@mixin clearfix() {
+  &::before,
+  &:after {
+    content: " ";
+    display: table;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+  }
+  & {
+    zoom: 1
+  }
+}
+
+//单行溢出省略号
+@mixin ellipsis() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@mixin borderbox() {
+  box-sizing: border-box;
+  * {
+    box-sizing: inherit;
+  }
+}
+
+@function toNumber($number) {
+  @return $number / ($number * 0 + 1);
+}
+
+//$px为需要转换的字号
+@function pxTorem($px) {
+  @return toNumber($px) / $pxToRemScale * 1rem;
+}
+
+//px => rem
+@mixin remCalc($property, $values...) {
+  $max: length($values); //返回$values列表的长度值
+  $remValues: '';
+
+  @for $i from 1 through $max {
+    $value: toNumber(nth($values, $i));
+    $remValues: #{$remValues + $value/$pxToRemScale }rem;
+
+    @if $i < $max {
+      $remValues: #{$remValues + " "};
+    }
+  }
+
+  #{$property}: $remValues;
+}
+
+//背景图高分屏处理
+@mixin bg-image($url) {
+  background-image: url($url + "@2x.png");
+  background-repeat: no-repeat;
+  @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+    background-image: url($url + "@3x.png")
+  }
+}

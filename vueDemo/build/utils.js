@@ -60,7 +60,12 @@ exports.cssLoaders = function (options) {
     postcss: generateLoaders(),
     less: generateLoaders('less'),
     sass: generateLoaders('sass', { indentedSyntax: true }),
-    scss: generateLoaders('sass'),
+    scss: generateLoaders('sass').concat({
+      loader: 'sass-resources-loader',
+      options: {  //所有scss 文件自动引入 config文件 (建议只写变量和 minx 函数)
+        resources: path.resolve(__dirname,'../src/assets/common/css/config.scss')
+      }
+    }),
     stylus: generateLoaders('stylus'),
     styl: generateLoaders('stylus')
   }
