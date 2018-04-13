@@ -1,0 +1,112 @@
+@charset "utf-8";
+/**
+ * Created by fwxing on 2018/04/13
+ */
+
+/*公共样式*/
+html {
+  -webkit-text-size-adjust: none;
+}
+
+body {
+  font-size: 0.3rem;
+  @include borderbox();
+}
+
+a, h1, h2, h3, img, body, html, ul, li, p {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  border: 0
+}
+
+img {
+  vertical-align: middle;
+}
+
+.clearfix {
+  @include clearfix();
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+body {
+  font-size: .20rem;
+}
+
+//字体颜色
+.text-default {
+  color: $txtColor;
+}
+
+.text-primary {
+  color: $mainColor;
+}
+
+.text-minor {
+  color: $txtColorLight;
+}
+
+.text-warn {
+  color: $txtWarn;
+}
+.font_tuina{
+  font-size: inherit;
+}
+//文本对齐
+$txtDir: left, center, right;
+@each $dir in $txtDir {
+  .text-#{$dir} {
+    text-align: $dir;
+  }
+}
+
+//单行溢出隐藏
+.ellipsis {
+  @include ellipsis();
+}
+
+$size-list: (lg, 40px), (md, 30px), (sm, 20px), (xs, 10px);
+@each $item, $size in $size-list {
+  .groove-padd-#{$item} {
+    padding-left: pxTorem($size);
+    padding-right: pxTorem($size);
+  }
+  .groove-marg-#{$item} {
+    margin-left: pxTorem($size);
+    margin-right: pxTorem($size);
+  }
+}
+
+//盒子模型
+.borderbox {
+  @include borderbox();
+}
+
+//mintui picker 字体
+.picker {
+  .picker-item {
+    font-size: .26rem;
+    padding: 0 5px;
+  }
+
+  .picker-selected {
+    font-size: .3rem;
+  }
+}

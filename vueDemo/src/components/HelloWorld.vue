@@ -80,6 +80,9 @@
         </a>
       </li>
     </ul>
+    <div class="ellipsis">
+      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, quae, vel? Aperiam, delectus deserunt enim exercitationem explicabo harum in inventore iste maxime neque nihil nisi, porro possimus quia reiciendis voluptatibus!
+    </div>
   </div>
 </template>
 
@@ -95,7 +98,7 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
 h1, h2 {
   font-weight: normal;
 }
@@ -110,4 +113,7 @@ li {
 a {
   color: #42b983;
 }
+  .ellipsis{
+    @include ellipsis(2);
+  }
 </style>
