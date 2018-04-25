@@ -9,7 +9,7 @@ html {
 }
 
 body {
-  font-size: 0.3rem;
+  font-size: 0.28rem;
   @include borderbox();
 }
 
@@ -19,23 +19,12 @@ a, h1, h2, h3, img, body, html, ul, li, p {
 }
 
 img {
-  border: 0
-}
-
-img {
+  border: 0;
   vertical-align: middle;
 }
 
 .clearfix {
   @include clearfix();
-}
-
-.fl {
-  float: left;
-}
-
-.fr {
-  float: right;
 }
 
 li {
@@ -46,29 +35,34 @@ a {
   text-decoration: none;
 }
 
-body {
-  font-size: .20rem;
+.font_tuina {
+  font-size: inherit;
+}
+
+//浮动
+$floatDir: left, right;
+@each $val in $floatDir {
+  .pull-#{$val} {
+    float: $val;
+  }
+}
+
+//盒子
+$displayModel: (flex, flex), (block, block), (iblock, inline-block), (inline, inline), (table, table);
+@each $k, $v in $displayModel {
+  .box-#{$k} {
+    display: $v;
+  }
 }
 
 //字体颜色
-.text-default {
-  color: $txtColor;
+$txtcolor: (default, $txtColor), (primary, $mainColor), (minor, $txtColorLight), (warn, $txtWarn);
+@each $val, $color in $txtcolor {
+  .text-#{$val} {
+    color: $color;
+  }
 }
 
-.text-primary {
-  color: $mainColor;
-}
-
-.text-minor {
-  color: $txtColorLight;
-}
-
-.text-warn {
-  color: $txtWarn;
-}
-.font_tuina{
-  font-size: inherit;
-}
 //文本对齐
 $txtDir: left, center, right;
 @each $dir in $txtDir {
@@ -82,13 +76,14 @@ $txtDir: left, center, right;
   @include ellipsis();
 }
 
+//槽宽
 $size-list: (lg, 40px), (md, 30px), (sm, 20px), (xs, 10px);
 @each $item, $size in $size-list {
-  .groove-padd-#{$item} {
+  .groove-pd-#{$item} {
     padding-left: pxTorem($size);
     padding-right: pxTorem($size);
   }
-  .groove-marg-#{$item} {
+  .groove-#{$item} {
     margin-left: pxTorem($size);
     margin-right: pxTorem($size);
   }
